@@ -20,6 +20,74 @@ class UiPreferences(private val preferenceStore: PreferenceStore) {
         return preferenceStore.getBoolean("dynamic_color_mode", false)
     }
     
+    fun coverBasedThemeEnabled(): Preference<Boolean> {
+        return preferenceStore.getBoolean("cover_based_theme_enabled", false)
+    }
+    
+    fun coverBasedThemeStyle(): Preference<PreferenceValues.CoverBasedThemeStyle> {
+        return preferenceStore.getEnum("cover_based_theme_style", PreferenceValues.CoverBasedThemeStyle.TonalSpot)
+    }
+    
+    fun coverBasedThemeSaturation(): Preference<Float> {
+        return preferenceStore.getFloat("cover_based_theme_saturation", 1.0f)
+    }
+    
+    fun coverBasedThemeIntensity(): Preference<Float> {
+        return preferenceStore.getFloat("cover_based_theme_intensity", 1.0f)
+    }
+    
+    fun coverBasedThemeTextColorMode(): Preference<PreferenceValues.CoverBasedTextColorMode> {
+        return preferenceStore.getEnum("cover_based_theme_text_color", PreferenceValues.CoverBasedTextColorMode.Auto)
+    }
+    
+    fun coverBasedThemeForLibrary(): Preference<Boolean> {
+        return preferenceStore.getBoolean("cover_based_theme_for_library", true)
+    }
+    
+    fun coverBasedThemeSource(): Preference<PreferenceValues.CoverBasedThemeSource> {
+        return preferenceStore.getEnum("cover_based_theme_source", PreferenceValues.CoverBasedThemeSource.BookCover)
+    }
+    
+    fun coverBasedThemeSurfaceTinting(): Preference<Boolean> {
+        return preferenceStore.getBoolean("cover_based_theme_surface_tinting", true)
+    }
+    
+    fun coverBasedThemeContrast(): Preference<PreferenceValues.CoverBasedThemeContrast> {
+        return preferenceStore.getEnum("cover_based_theme_contrast", PreferenceValues.CoverBasedThemeContrast.Vibrant)
+    }
+    
+    fun coverBasedThemePreset(): Preference<PreferenceValues.CoverBasedThemePreset> {
+        return preferenceStore.getEnum("cover_based_theme_preset", PreferenceValues.CoverBasedThemePreset.Medium)
+    }
+    
+    fun coverBasedThemeBrightness(): Preference<Float> {
+        return preferenceStore.getFloat("cover_based_theme_brightness", 5f)
+    }
+    
+    fun coverBasedThemeBackgroundTintOpacity(): Preference<Float> {
+        return preferenceStore.getFloat("cover_based_theme_background_tint_opacity", 3f)
+    }
+    
+    fun coverBasedThemeBackdropBlur(): Preference<Float> {
+        return preferenceStore.getFloat("cover_based_theme_backdrop_blur", 0f)
+    }
+    
+    fun showSimilarTitles(): Preference<Boolean> {
+        return preferenceStore.getBoolean("show_similar_titles", true)
+    }
+    
+    fun similarTitlesSource(): Preference<PreferenceValues.SimilarTitlesSource> {
+        return preferenceStore.getEnum("similar_titles_source", PreferenceValues.SimilarTitlesSource.AllSources)
+    }
+    
+    fun similarTitlesMatchMode(): Preference<PreferenceValues.SimilarTitlesMatchMode> {
+        return preferenceStore.getEnum("similar_titles_match_mode", PreferenceValues.SimilarTitlesMatchMode.ByName)
+    }
+    
+    fun similarTitlesMaxCount(): Preference<Int> {
+        return preferenceStore.getInt("similar_titles_max_count", 10)
+    }
+    
     fun useTrueBlack(): Preference<Boolean> {
         return preferenceStore.getBoolean("use_true_black", false)
     }

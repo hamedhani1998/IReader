@@ -3,6 +3,7 @@ package ireader.presentation.core.di
 // Enhanced Settings ViewModels
 import ireader.presentation.core.ScreenContentViewModel
 import ireader.presentation.core.theme.AppThemeViewModel
+import ireader.presentation.core.theme.CoverBasedThemeManager
 import ireader.presentation.di.screenModelModule
 import ireader.presentation.di.syncPresentationModule
 import ireader.presentation.ui.book.viewmodel.BookDetailViewModel
@@ -36,6 +37,7 @@ import ireader.presentation.ui.settings.library.SettingsLibraryViewModel
 import ireader.presentation.ui.settings.notifications.SettingsNotificationViewModel
 import ireader.presentation.ui.settings.reader.ReaderSettingScreenViewModel
 import ireader.presentation.ui.settings.reader.SettingsReaderViewModel
+import ireader.presentation.ui.settings.recommendations.SimilarTitlesSettingsViewModel
 import ireader.presentation.ui.settings.repository.SourceRepositoryViewModel
 import ireader.presentation.ui.settings.security.SecuritySettingsViewModel
 import ireader.presentation.ui.settings.security.SettingsSecurityViewModel
@@ -58,7 +60,8 @@ val PresentationModules = module {
     factory <FontScreenStateImpl> { FontScreenStateImpl() }
 
     factory  { ScreenContentViewModel(get(), get(), get()) }
-    single<AppThemeViewModel> { AppThemeViewModel(get(), get(), get(), get()) }
+    single<AppThemeViewModel> { AppThemeViewModel(get(), get(), get(), get(), get()) }
+    single { CoverBasedThemeManager(get(), get()) }
 
     // ExploreViewModel - Simplified with ExploreUseCases aggregate (Requirements: 4.2, 4.4)
     // Reduced from 10 parameters to 6 using ExploreUseCases aggregate
@@ -139,6 +142,7 @@ val PresentationModules = module {
             applicationScope = get(),
             createEpub = get(),
             readerPreferences = get(),
+            uiPreferences = get(),
             param = params,
             checkSourceAvailabilityUseCase = get(),
             migrateToSourceUseCase = get(),
@@ -158,7 +162,8 @@ val PresentationModules = module {
             localizeHelper = get(),            // For UiText localization
             trackingRepository = getOrNull(),  // For AniList tracking
             translateBookMetadataUseCase = getOrNull(),  // For auto-translating novel names
-            chapterRepository = get()          // For clearChapterContent operation
+            chapterRepository = get(),          // For clearChapterContent operation
+            getRecommendationsUseCase = getOrNull(),  // For genre-based recommendations
         )
     }
     // Changed from single to factory - settings screen is not always needed
@@ -194,6 +199,7 @@ val PresentationModules = module {
     factory  { SettingsReaderViewModel(get()) }
     factory  { SettingsLibraryViewModel(get(), get(), get()) }
     factory  { SettingsDownloadViewModel(get()) }
+    factory  { SimilarTitlesSettingsViewModel(get()) }
     factory  { SettingsSecurityViewModel(get(), get()) }
     factory  { SettingsNotificationViewModel(get()) }
     factory  { SettingsTrackingViewModel(get(), get(), OAuthCallbackHandler(), getOrNull()) }
